@@ -1,0 +1,23 @@
+{
+  "name": "experimental_pwafat",
+  "version": "0.7.23",
+  "description": "Use Playwright to create availability tests with AppInsights, running on Azure Functions",
+  "main": "index.js",
+  "dependencies": {
+    "@playwright/test": "^1.15.0",
+    "applicationinsights": "^2.1.7",
+    "azure-storage": "^2.10.4",
+    "playwright": "^1.15.0",
+    "playwright-chromium": "^1.15.0",
+    "typescript": "^4.4.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "tsc & node ./dist/test/tests.js"
+  },
+  "author": "stpetrov",
+  "license": "ISC",
+  "prettier": {
+    "printWidth": 160
+  }
+}
