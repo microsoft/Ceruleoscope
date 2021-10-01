@@ -1,6 +1,6 @@
 {
-  "name": "experimental_pwafat",
-  "version": "0.7.23",
+  "name": "ceruleoscope",
+  "version": "0.0.7",
   "description": "Use Playwright to create availability tests with AppInsights, running on Azure Functions",
   "main": "index.js",
   "dependencies": {
