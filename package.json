@@ -1,6 +1,6 @@
 {
   "name": "ceruleoscope",
-  "version": "0.7.23",
+  "version": "0.0.7",
   "description": "Use Playwright to create availability tests with AppInsights, running on Azure Functions",
   "main": "index.js",
   "dependencies": {
@@ -13,9 +13,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "build": "tsc",
-    "test": "node ./dist/test/tests.js",
-    "buildtest": "tsc & node ./dist/test/tests.js"
+    "test": "tsc & node ./dist/test/tests.js"
   },
   "author": "stpetrov",
   "license": "ISC",
