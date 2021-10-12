@@ -1,7 +1,6 @@
 import { test as baseTest, expect } from "@playwright/test";
 import { PlaywrightAvailabilityTester } from "./PlaywrightAvailabilityTester";
 import * as PW from "playwright";
-import { PlaywrightAvailabilityTesterOptions } from ".";
 
 const appInsightsAvailabilityTesterTag = "[AVTESTRUN]";
 
@@ -9,13 +8,7 @@ const test = baseTest.extend({
   page: async ({ page }, use, testInfo) => {
     console.log(appInsightsAvailabilityTesterTag, testInfo.title);
 
-    // use env vars to init reporting
-    let pwTesterOptions: PlaywrightAvailabilityTesterOptions = {
-      logDebugToTelemetryClient: true,
-      log: console.log,
-      error: console.error,
-    };
-    var pwat = new PlaywrightAvailabilityTester(pwTesterOptions);
+    var pwat = new PlaywrightAvailabilityTester();
 
     let browserContext = page.context();
     if (browserContext) {
