@@ -47,7 +47,7 @@ The Short Version below is intended for a quick overview and requires some famil
 
   - Replace the function's index.js with this snippet:
 
-        ``` javascript
+``` javascript
         module.exports = async function (context, myTimer) {
           try{
             const { PlaywrightTestLauncher } = require("ceruleoscope");
@@ -59,20 +59,18 @@ The Short Version below is intended for a quick overview and requires some famil
             context.log("Failed to run Playwright tests: " + ex);
           }
         }; 
-        ```
+```
 
   - Deploy the function app to Azure
 
 - In Azure Portal (after the function has been deployed and triggered):
 
   - Navigate to the Function's Application Insights:
-
     - View Availability results and End-to-end transactions
     - Create alerts based on the test
     - Find links to Playwright's Trace files
 
   - Navigate to the Function's Storage account, `playwright-insights` container
-
     - Find Playwright Trace files
     - (optional) Set container accessibility to "Blob" so the Trace links can be downloaded in the browser
 
@@ -84,21 +82,21 @@ Open portal.azure.com in a browser, sign in.\
 Your subscription must allow you to create and modify the resources mentioned in this guide.
 
 - Click "Create a resource" in Azure Portal\
-    ![](./docs/img/paste-DEF969F2.png "Create a resource in Azure Portal"){width="300"}
+    ![](./docs/img/paste-DEF969F2.png "Create a resource in Azure Portal")
 - Select "Function App"\
-    ![](./docs/img/paste-74FB2A54.png){width="600"}
+    ![](./docs/img/paste-74FB2A54.png)
 - Select/create the resource group and function app name suitable for you
 - Select **Node.js** as the Runtime stack
 - Version 14LTS+\
-    ![](./docs/img/paste-22E2DE46.png){width="600"}
+    ![](./docs/img/paste-22E2DE46.png)
 - Click Next: Hosting
 - Storage account can be changed if needed. Trace and HAR files will be stored there (if enabled)
 - Select **Linux** as the operating system (the package doesn't work on Windows as it assumes some file structure)
 - Plan type should remain "Consumption (**Serverless**)"\
-    ![](./docs/img/paste-FD7DFE2B.png){width="600"}
+    ![](./docs/img/paste-FD7DFE2B.png)
 - Click "Next: Networking" and then "Next: Monitoring"
 - Enable Application Insights must be "yes"\
-    ![](./docs/img/paste-5186043C.png){width="600"}
+    ![](./docs/img/paste-5186043C.png)
 - Click "Review + create", check the properties and click "Create"
 
 #### Azure Portal - Customize the Function App
@@ -107,32 +105,32 @@ Navigate to the Function App created above in Azure Portal
 
 - Click on the "Configuration" blade
 - Click on "+ New application setting"\
-    ![](./docs/img/paste-370A94D7.png){width="600"}
+    ![](./docs/img/paste-370A94D7.png)
 - Create `PLAYWRIGHT_BROWSERS_PATH` setting, with the value `home/site/wwwroot/node_modules/playwright-chromium/.local-browsers/`\
     without this setting Playwright/Test will complain it can't find its browser engine
 - `LOCATION` can be used to override the default location reported in the availability test (it region)
 - `TESTNAME` can be used to override the default availability test name (the function app name)
 - Click OK in the setting editing panel, it will close
 - Click "Save" above the settings, click "Continue" to confirm the Save\
-    ![](./docs/img/paste-E1E465CA.png){width="600"}
+    ![](./docs/img/paste-E1E465CA.png)
 
 #### VSCode - Create Azure Functions Project
 
 - Install and launch [VSCode](https://code.visualstudio.com/download). Install [Azure Functions extension](https://docs.microsoft.com/en-us/azure/azure-functions/functions-develop-vs-code?tabs=csharp) in VSCode (CTRL-Shift-X, search, install)\
-    ![](./docs/img/paste-433F3501.png){width="300"}
+    ![](./docs/img/paste-433F3501.png)
 - Open the Azure extension panel and expand the Functions to find the function app created in Portal
 - You can extend the Application Settings node to confirm the PLAYWRIGHT_BROWSERS_PATH setting is there and correct
 - Click the "Create New Project" icon It only shows up when the mouse pointer is inside the Azure/Functions panel
 - Create a new folder and select it\
-    ![](./docs/img/paste-873D08E6.png){width="600"}
+    ![](./docs/img/paste-873D08E6.png)
 - A drop-down selection appears in VScode, select "**JavaScript**"\
-    ![](./docs/img/paste-DB61B3D7.png){width="600"}
+    ![](./docs/img/paste-DB61B3D7.png)
 - Second drop-down appears, select "**Timer trigger**". (for development purposes HTTP trigger may be easier to use)\
-    ![](./docs/img/paste-1143695A.png){width="600"}
+    ![](./docs/img/paste-1143695A.png)
 - Third drop-down appears, enter a name for the function. Each Function App can host several functions
 - Fourth drop-down appears, enter a [cron expression](https://en.wikipedia.org/wiki/Cron#CRON_expression).\
     The default one (0 */5* \* \* \*) is for every 5 minutes; (0 15 \* \* \*) is for every hour at the 15 min [etc](https://www.freeformatter.com/cron-expression-generator-quartz.html)\
-    ![](./docs/img/paste-D796BD6D.png){width="600"}
+    ![](./docs/img/paste-D796BD6D.png)
 
 #### VSCode - Customize the Functions Project
 
@@ -189,7 +187,7 @@ npm install ceruleoscope
     `npx playwright codegen yourwebsite.com`
 
 - A browser opens and shows a "Playwright Inspector" panel on the side\
-    ![](./docs/img/paste-226B3214.png){width="600"}
+    ![](./docs/img/paste-226B3214.png)
 
 - Exercise the feature that needs availability testing by navigating your web site\
     **DO NOT ENTER PASSWORDS, OR LEAVE THEM IN THE TEST CODE**
@@ -208,7 +206,7 @@ npm install ceruleoscope
 - The test can be further customized as needed
 
 - Save the file\
-    ![](./docs/img/paste-7EDFAA07.png){width="600"}
+    ![](./docs/img/paste-7EDFAA07.png)
 
 - Run the test locally with this command in VSCode's Terminal:\
     `npx playwright test --headed`\
@@ -216,13 +214,13 @@ npm install ceruleoscope
 
 #### VSCode - Deploy the Function App
 
-- In VSCode open the Azure extension and click "Deploy to Function App..." icon ![](./docs/img/paste-10DB695B.png){width="24" height="23"}
+- In VSCode open the Azure extension and click "Deploy to Function App..." icon ![](./docs/img/paste-10DB695B.png)
 
 - A drop-down appears to select a function app, make sure to select the one created with node.js/Linux\
-    ![](./docs/img/paste-5E7EAC96.png){width="600"}
+    ![](./docs/img/paste-5E7EAC96.png)
 
 - Click "Deploy" in the confirmation popup\
-    ![](./docs/img/paste-99685123.png){width="600"}
+    ![](./docs/img/paste-99685123.png)
 
 - Monitor the deployment in the Output window (optional)
 
@@ -240,20 +238,19 @@ npm install ceruleoscope
 - It may take a few minutes for the next execution to start (depending on the timer trigger settings)
 
 - The logs should contain "Playwright tests console output: done"\
-    ![](./docs/img/paste-6B6BC52E.png){width="600"}
+    ![](./docs/img/paste-6B6BC52E.png)
 
 - Click the "Application Insights" blade, navigate to the configured Application Insights resource\
-    ![](./docs/img/paste-A28B1E56.png){width="600"}
+    ![](./docs/img/paste-A28B1E56.png)
 
 - The "Overview" blade of that Application Insights resource should show no Failed requests, and some Server requests (depending on the frequency configured for the time trigger)
 
 - Check if there are failing or successful executions.\
     If there only failing executions, make sure all packages are included and the code runs locally in VSCode\
-    ![](./docs/img/paste-7A857534.png){width="600"}
-
+    ![](./docs/img/paste-7A857534.png)
 - Click the "Availability" blade.\
     If the Availability telemetry is not found, but there are no failed executions, then make sure the `require` statement in the generated test is replaced.\
-    ![](./docs/img/paste-AFE3F62D.png){width="600"}
+    ![](./docs/img/paste-AFE3F62D.png)
 
 - Click the Availability blade to see the results of the availability test(s)
 
@@ -285,7 +282,7 @@ This step is optional and may depend on the security considerations of your orga
 - Navigate to the storage account used by the Function App
 
 - Click the Containers blade\
-    ![](./docs/img/paste-D5FB099C.png){width="600"}
+    ![](./docs/img/paste-D5FB099C.png)
 
 - Double-click the "playwright-insights" container, select a trace file and download it
 
@@ -294,7 +291,7 @@ This step is optional and may depend on the security considerations of your orga
 - Check the checkbox for "playwright-insights" container
 
   - Click "Change access level" button above the containers list\
-        ![](./docs/img/paste-5E939454.png){width="300"}
+        ![](./docs/img/paste-5E939454.png)
 
   - In the drop-down select "**Blob**" (it would be "Private" by default)
 
@@ -317,4 +314,4 @@ This step is optional and may depend on the security considerations of your orga
 
   - Refer to [Playwright's documentation](https://playwright.dev/docs/trace-viewer) for details
 
-        ![](./docs/img/paste-822D79B4.png){width="600"}
+        ![](./docs/img/paste-822D79B4.png)
