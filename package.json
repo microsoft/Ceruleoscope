@@ -1,6 +1,6 @@
 {
   "name": "ceruleoscope",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Use Playwright to create availability tests with AppInsights, running on Azure Functions",
   "repository": {
     "type": "git",
