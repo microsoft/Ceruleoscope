@@ -104,10 +104,15 @@ export class PageInsights {
     }
 
     try {
-      let response = await request.response();
+      let statusCode = 898;
+      try {
+        let response = await request.response();
+        statusCode = response?.status() || 899;
+      } catch {}
+
       const traceparent = this.getTraceParentHeaderValue(request);
 
-      this.trackPageDependency(request.method(), request.url(), response?.status() || 899, request.timing(), traceparent, request.failure()?.errorText);
+      this.trackPageDependency(request.method(), request.url(), statusCode, request.timing(), traceparent, request.failure()?.errorText);
     } catch (r) {
       this.options?.error("Failed dependency tracking", r);
     }

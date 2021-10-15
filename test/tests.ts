@@ -15,8 +15,7 @@ let aiLogs: any[] = [];
   appInsights
     .setup("12341234-1234-dd4e-1234-123412341234") // fake ikey
     .setDistributedTracingMode(appInsights.DistributedTracingModes.AI_AND_W3C)
-    .setUseDiskRetryCaching(false)
-    .start();
+    .setUseDiskRetryCaching(false);
 
   // don't send any telemetry remotely
   appInsights.defaultClient.channel.send = function () {};
