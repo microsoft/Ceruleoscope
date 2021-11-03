@@ -8,8 +8,8 @@ This article will cover:
   - How to create an Azure Function with a Playwright test
   - How to deploy the function
   - How to observe the Availability telemetry
-  - How to configure Storage
   - How to use secrets in tests
+  - How to configure Storage
   
 For feedback, feature requests and access to code please use **[Ceruleoscope github repository](https://github.com/microsoft/Ceruleoscope)**
 
@@ -91,7 +91,7 @@ Additional information about creating an Azure Function app can be found [here](
 - Select/create the resource group and function app name suitable for you
 - Select **Node.js** as the Runtime stack
 - Version 14LTS+ or later\
-    ![](./docs/img/paste-22E2DE46.png)
+    ![](./docs/img/portal_create_function_app.png)
 - Select **Linux** as the operating system (the package doesn't work on Windows as it assumes some file structure)
 - Plan type should remain "Consumption (**Serverless**)"
 - **Enable Application Insights** must be "yes"
@@ -101,7 +101,7 @@ Additional information about creating an Azure Function app can be found [here](
 Navigate to the Function App created above in Azure Portal
 
 - Add a new application setting from the "Configuration" 
-    ![](./docs/img/paste-370A94D7.png)
+    ![](./docs/img/portal_configure_function_app.png)
 - Create a setting\
   **`PLAYWRIGHT_BROWSERS_PATH`**\
   with value\
@@ -180,7 +180,7 @@ npm install ceruleoscope
     `npx playwright codegen yourwebsite.com`
 
 - A browser opens and shows a "Playwright Inspector" panel on the side\
-    ![](./docs/img/paste-226B3214.png)
+    ![](./docs/img/playwright_inspector_testgen.png)
 
 - Exercise the feature that needs availability testing by navigating your web site\
     **AVOID USING REAL PASSWORDS, DO NOT LEAVE THEM IN THE TEST CODE**
@@ -204,7 +204,7 @@ npm install ceruleoscope
 
 #### Deploy the Function App from VSCode
 
-- In VSCode open the Azure extension and click "Deploy to Function App..." icon ![](./docs/img/paste-10DB695B.png)
+- In VSCode open the Azure extension and click "Deploy to Function App..." icon ![](./docs/img/vscode_deploy_icon.png)
 - A drop-down appears to select a function app to deploy to, make sure to select the one created with node.js/Linux
 - Click "Deploy" in the confirmation popup
 - Monitor the deployment in the Output window (optional)
@@ -227,7 +227,7 @@ check if `.vscode/settings.json` and `.funcignore` have been modified as describ
     If there only failing executions, make sure all packages are included and the code runs locally in VSCode
 - Click the **Availability** blade.\
     If the Availability telemetry is not found, but there are no failed executions, then make sure the `require` statement in the generated test is replaced.\
-    ![](./docs/img/paste-AFE3F62D.png)
+    ![](./docs/img/portal_availability_scatterplot.png)
 
 - Click the Availability blade to see the results of the availability test(s)
   - When the chart is in **Line** mode, the line represents the percentage of successful tests (higher is better)
