@@ -183,7 +183,7 @@ export class PlaywrightAvailabilityTester {
       // APPSETTING_TESTNAME can be used to override that
       let testName = this.testName;
       if (!testName || testName == "") {
-        location = process.env.APPSETTING_TESTNAME || process.env.APPSETTING_WEBSITE_SITE_NAME || "NO_TESTNAME";
+        testName = process.env.APPSETTING_TESTNAME || process.env.APPSETTING_WEBSITE_SITE_NAME || "NO_TESTNAME";
       }
       bci.testName = testName;
 
