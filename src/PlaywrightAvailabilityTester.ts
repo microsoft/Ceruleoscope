@@ -36,8 +36,9 @@ export class PlaywrightAvailabilityTester {
 
   private options?: PlaywrightAvailabilityTesterOptions;
 
-  constructor(options?: PlaywrightAvailabilityTesterOptions) {
+  constructor(testName: any, options?: PlaywrightAvailabilityTesterOptions) {
     this.options = options;
+    this.testName = testName.toString();
 
     if (options?.logDebugToTelemetryClient) {
       options.log = (...args: any[]) =>
@@ -181,11 +182,8 @@ export class PlaywrightAvailabilityTester {
 
       // Azure Functions uses 'APPSETTING_WEBSITE_SITE_NAME' environment variable to pass the logic app name
       // APPSETTING_TESTNAME can be used to override that
-      let testName = this.testName;
-      if (!testName || testName == "") {
-        testName = process.env.APPSETTING_TESTNAME || process.env.APPSETTING_WEBSITE_SITE_NAME || "NO_TESTNAME";
-      }
-      bci.testName = testName;
+      
+      bci.testName = this.testName;
 
       (<any>browserContext)[BrowserContextInsights.browserContextInsightsAttachedPropertyName] = bci;
     }
