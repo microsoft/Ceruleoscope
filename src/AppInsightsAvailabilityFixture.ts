@@ -8,7 +8,7 @@ const test = baseTest.extend({
   page: async ({ page }, use, testInfo) => {
     console.log(appInsightsAvailabilityTesterTag, testInfo.title);
 
-    var pwat = new PlaywrightAvailabilityTester();
+    var pwat = new PlaywrightAvailabilityTester(testInfo.title);
 
     let browserContext = page.context();
     if (browserContext) {
