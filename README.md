@@ -23,7 +23,7 @@ The Short Version below is intended for a quick overview and requires some famil
   - Add this config setting to the function app:\
         **`PLAYWRIGHT_BROWSERS_PATH=/home/site/wwwroot/node_modules/playwright-chromium/.local-browsers/`**
   
-  - Add Managed Identity and Key Vault, configure the function to access they Key Valut for storing test secrets
+  - Add Managed Identity and Key Vault, configure the function to access they Key Vault for storing test secrets
   
   - Add config settings to store variable data, access it via `process.env["config_name"]` in test
 
